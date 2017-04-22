@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>Celebrities</ion-title>
+      <ion-buttons end>
+      <button ion-button icon-only (click)= "search()">
+        <ion-icon name="md-search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+    <ion-toolbar color="dark">
+      <div>
+  <ion-segment [(ngModel)]="celebs">
+    <ion-segment-button value="popular-celebs" style="color:white;">
+      Popular Celebrities
+    </ion-segment-button>
+  </ion-segment>
+</div>
+      </ion-toolbar>
+</ion-header>
+
+<ion-content>
+     <ion-refresher (ionRefresh)="doRefresh($event)"  >
+    <ion-refresher-content style="color:red !important"
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+    <ion-grid>
+  <ion-row >
+    <ion-col width-33 *ngFor="let pc of pcs">
+     <ion-card (click) = "celebDetails(pc.id)" color="darker">
+
+      <img style=" width: 100%; height: 150px; object-fit: cover; overflow: hidden;" src="http://image.tmdb.org/t/p/w342{{pc.profile_path}}"/>
+         <ion-card-header text-wrap style="font-size:.9em; text-align:center;">{{pc.name}}</ion-card-header>
+        </ion-card>
+      </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>

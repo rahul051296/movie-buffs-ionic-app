@@ -1,0 +1,105 @@
+<ion-header>
+
+  <ion-navbar color='dark'>
+    <ion-title>{{md?.title}} ({{year}})</ion-title>
+  </ion-navbar>
+    <ion-toolbar color="dark">
+      <div>
+  <ion-segment [(ngModel)]="moviedetails">
+    <ion-segment-button value="details" style="color:white;">
+      Details
+    </ion-segment-button>
+    <ion-segment-button value="cast" style="color:white">
+      Cast
+    </ion-segment-button>
+    <ion-segment-button value="gallery" style="color:white">
+      Gallery
+    </ion-segment-button>
+    <ion-segment-button value="similar-movie" style="color:white">
+      Similar Movies
+    </ion-segment-button>
+  </ion-segment>
+</div>
+      </ion-toolbar>
+</ion-header>
+
+
+<ion-content color="dark">
+    
+     <ion-refresher (ionRefresh)="doRefresh($event)"  >
+    <ion-refresher-content style="color:red !important"
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+    
+   <div [ngSwitch]="moviedetails">
+  <ion-grid padding style="color:white; text-align:center;" *ngSwitchCase="'details'">
+  <ion-row >
+    <ion-col width-67>
+    
+      <img src="http://image.tmdb.org/t/p/w342{{md?.poster_path}}" onerror="this.onerror=null;this.src='http://movie-buffs.xyz/images/preview.jpg';"/>
+
+      </ion-col>
+      <ion-col width-33>  
+          <p *ngIf="md?.genres.length!=0"><b>Genre</b><br>{{md?.genres[0].name}}</p>   
+          <p><b>Release Date</b><br>{{md?.release_date}}</p>
+          <p><b>Runtime</b><br> {{md?.runtime}} minutes</p>
+          <p><b>Status</b><br> {{md?.status}}</p>
+        <h2><ion-icon name="star" style="color:#FFD700"></ion-icon> {{md?.vote_average}}/10</h2>
+          <p>{{md?.vote_count}} votes</p>
+          <a href="https://www.youtube.com/results?search_query={{md?.title}}" target="_blank"><ion-icon name="logo-youtube" style="color:white; font-size:3em;"></ion-icon>
+</a>
+          <p><b>Search YouTube</b></p>
+      </ion-col>
+  </ion-row>
+      <ion-row>
+          <ion-col width-100>
+              <p align=left><b>Synopsis</b></p>   
+        <p>{{md?.overview}}</p>
+              <p *ngIf="md?.tagline" align=center ><b>Tagline: </b> {{md?.tagline}}</p>
+            </ion-col>
+      </ion-row>
+</ion-grid>
+    <ion-grid *ngSwitchCase="'cast'" color="darker" style="color:white; text-align:center">
+     <ion-row >
+    <ion-col width-33 *ngFor="let cs of cast">
+                <ion-card (click) = "celebDetails(cs.id)" color="darker">
+         <div>
+             <img style=" width: 100%; height: 150px; object-fit: cover; overflow: hidden;" src="http://image.tmdb.org/t/p/w185{{cs.profile_path}}" onerror="this.onerror=null;this.src='http://movie-buffs.xyz/images/preview.jpg';"/>
+             <ion-card-header text-wrap>{{cs.name}}</ion-card-header>
+            <ion-card-header text-wrap style="font-size:.9em; padding-top:0; color: #c6c6c6">{{cs.character}}</ion-card-header>
+        </div>
+        </ion-card>
+      </ion-col>
+  </ion-row>
+    </ion-grid> 
+       <ion-grid *ngSwitchCase="'gallery'" color="darker" style="color:white; text-align:center">
+        <ion-row  *ngFor="let gl of gallery">
+           
+            <ion-col >
+                <div>
+                <img src="http://image.tmdb.org/t/p/w500{{gl.file_path}}"/>
+                </div>
+            </ion-col>   
+        </ion-row> 
+           <ion-row  >
+            <ion-col width-50 *ngFor="let glp of galleryp">
+                <img src="http://image.tmdb.org/t/p/w342{{glp.file_path}}" style="padding:2px;"/>
+            </ion-col>   
+        </ion-row>
+    </ion-grid>
+    <ion-grid *ngSwitchCase="'similar-movie'" color="darker" style="color:white; text-align:center">
+     <ion-row >
+    <ion-col width-33 *ngFor="let sm of similar" >
+        <ion-card (click) = "movieDetails(sm.id)" color="darker" no-padding>
+      <img style=" width: 100%; height: 150px; object-fit: cover; overflow: hidden;" src="http://image.tmdb.org/t/p/w185{{sm.poster_path}}" onerror="this.onerror=null;this.src='http://movie-buffs.xyz/images/preview.jpg';"/>
+            <ion-card-header text-wrap style="font-size:1em;" >{{sm.title}}</ion-card-header>
+            <ion-card-content style="font-size:.9em; color: #c6c6c6"><ion-icon name="star" style="color:#FFD700; padding-top:0"></ion-icon> {{sm.vote_average}}/10</ion-card-content>
+        </ion-card>
+      </ion-col>
+  </ion-row>
+    </ion-grid>
+    </div>
+</ion-content>

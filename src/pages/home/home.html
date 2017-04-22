@@ -1,0 +1,75 @@
+<ion-header >
+  <ion-navbar  color='dark'>
+    <ion-title>Movies</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click) = "search()">
+        <ion-icon name="md-search"></ion-icon>
+      </button> 
+    </ion-buttons>
+  </ion-navbar>
+    
+     <ion-toolbar color="dark">
+      <div>
+  <ion-segment [(ngModel)]="movies">
+    <ion-segment-button value="now-playing" style="color:white;">
+      Now Playing
+    </ion-segment-button>
+    <ion-segment-button value="coming-soon" style="color:white">
+      Coming Soon
+    </ion-segment-button>
+  </ion-segment>
+</div>
+      </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)"  >
+    <ion-refresher-content style="color:red !important"
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+
+    <div [ngSwitch]="movies">
+    <div *ngFor = 'let np of nps'>
+     <div *ngIf = 'np.backdrop_path!=null'>
+  <ion-card *ngSwitchCase="'now-playing'" color="darker">
+      <div (click) = "movieDetails(np.id)">
+    <img src="http://image.tmdb.org/t/p/w780{{np.backdrop_path}}"/>
+  <ion-card-content>
+    <ion-card-title>
+        <h1 style="text-align:center; text-decoration:underline">{{np.title}}</h1>
+        <h6 style="text-align:center"> Release Date: {{np.release_date}}</h6>
+      </ion-card-title>
+      
+    <p>
+      {{np.overview}}
+    </p>
+  </ion-card-content>
+      </div>
+  </ion-card>
+         </div>
+        </div>
+        <div *ngFor = 'let cm of cms'>
+            <div *ngIf = 'cm.backdrop_path!=null'>
+<ion-card *ngSwitchCase="'coming-soon'" color="darker">
+    <div (click) = "movieDetails(cm.id)">
+
+     <img src="http://image.tmdb.org/t/p/w780{{cm.backdrop_path}}"/>
+  <ion-card-content>
+    <ion-card-title>
+        <h1 style="text-align:center; text-decoration:underline">{{cm.title}}</h1>
+        <h6 style="text-align:center"> Release Date: {{cm.release_date}}</h6>
+      </ion-card-title>
+      
+    <p>
+      {{cm.overview}}
+    </p>
+  </ion-card-content>
+    </div>
+  </ion-card>
+        </div>
+        </div>
+</div>
+</ion-content>

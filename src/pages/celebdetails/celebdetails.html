@@ -1,0 +1,93 @@
+<ion-header>
+
+  <ion-navbar color="dark"> 
+    <ion-title>{{cd?.name}}</ion-title>
+  </ion-navbar>
+    <ion-toolbar color="dark">
+      <div>
+  <ion-segment [(ngModel)]="celebdetails">
+    <ion-segment-button value="details" style="color:white;">
+      Bio
+    </ion-segment-button>
+    <ion-segment-button value="gallery" style="color:white;">
+      Gallery
+    </ion-segment-button>
+    <ion-segment-button value="movies" style="color:white">
+      Movies
+    </ion-segment-button>
+    <ion-segment-button value="tv-shows" style="color:white">
+      Tv Shows
+    </ion-segment-button>
+  </ion-segment>
+</div>
+      </ion-toolbar>
+</ion-header>
+
+
+<ion-content color="dark">
+      <ion-refresher (ionRefresh)="doRefresh($event)"  >
+    <ion-refresher-content style="color:red !important"
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+    
+       <div [ngSwitch]="celebdetails">
+  <ion-grid style="color:white; text-align:center;" *ngSwitchCase="'details'">
+  <ion-row >
+    <ion-col width-100>
+    
+      <img style=" width: 100%; height: 400px; object-fit: cover; overflow: hidden;" src="http://image.tmdb.org/t/p/w500{{cd?.profile_path}}" onerror="this.onerror=null;this.src='http://movie-buffs.xyz/images/preview.jpg';"/>
+
+      </ion-col>
+      </ion-row>
+      
+      <ion-row padding>
+          <ion-col width-100>
+              <p align=left><b>Biography</b></p>
+        <p align=left>{{cd?.biography}}</p>
+               <p align=left *ngIf="cd?.birthday"><b>Date of Birth: </b> {{cd?.birthday}}</p>
+              <p align=left *ngIf="cd?.deathday"><b>Died On: </b> {{cd?.deathday}}</p>
+          <p align=left *ngIf="cd?.place_of_birth"><b>Place of Birth: </b> {{cd?.place_of_birth}}</p>
+          <p align=left *ngIf="cd?.also_known_as.length!=0"><b>Also Known as: </b> {{cd?.also_known_as}}</p>
+            </ion-col>
+      </ion-row>
+</ion-grid>
+    <ion-grid *ngSwitchCase="'movies'" color="darker" style="color:white; text-align:center">
+     <ion-row >
+    <ion-col width-33 *ngFor="let cm of cmd">
+        <ion-card (click) = "movieDetails(cm.id)" color="darker">
+
+         
+      <img style=" width: 100%; height: 150px; object-fit: cover; overflow: hidden;"  src="http://image.tmdb.org/t/p/w185{{cm.poster_path}}" onerror="this.onerror=null;this.src='http://movie-buffs.xyz/images/preview.jpg';"/>
+            <ion-card-header text-wrap>{{cm.title}}</ion-card-header>
+            <ion-card-header text-wrap style="font-size:.9em; padding-top:0; color: #c6c6c6">{{cm.release_date}}</ion-card-header>
+        
+        </ion-card>
+      </ion-col>
+  </ion-row>
+    </ion-grid>
+           <ion-grid *ngSwitchCase="'gallery'" color="darker" style="color:white; text-align:center">
+        <ion-row  >
+            <ion-col width-50 *ngFor="let gl of gallery">
+            
+                <img src="http://image.tmdb.org/t/p/w500{{gl.file_path}}" style="padding:2px;"/>
+            
+            </ion-col>   
+        </ion-row>
+    </ion-grid>
+    <ion-grid *ngSwitchCase="'tv-shows'" color="darker" style="color:white; text-align:center">
+     <ion-row >
+    <ion-col width-33 *ngFor="let ct of ctd">
+        <ion-card (click) = "tvDetails(ct.id)" color="darker">
+      <img style=" width: 100%; height: 150px; object-fit: cover; overflow: hidden;" src="http://image.tmdb.org/t/p/w185{{ct.poster_path}}" onerror="this.onerror=null;this.src='http://movie-buffs.xyz/images/preview.jpg';"/>
+            <ion-card-header text-wrap>{{ct.name}}</ion-card-header>
+            <ion-card-header text-wrap style="font-size:.9em; padding-top:0; color: #c6c6c6">{{ct.first_air_date}}</ion-card-header>
+        </ion-card>
+      </ion-col>
+  </ion-row>
+    </ion-grid>
+    </div>
+
+</ion-content>

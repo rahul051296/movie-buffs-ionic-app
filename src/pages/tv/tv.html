@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>TV Shows</ion-title>
+      <ion-buttons end>
+      <button ion-button icon-only (click)= "search()">
+        <ion-icon name="md-search"></ion-icon>
+      </button>
+    </ion-buttons> 
+  </ion-navbar>
+    <ion-toolbar color="dark">
+      <div>
+  <ion-segment [(ngModel)]="tv">
+    <ion-segment-button value="airing-today" style="color:white;">
+      Airing Today
+    </ion-segment-button>
+    <ion-segment-button value="popular-shows" style="color:white">
+      Popular Show
+    </ion-segment-button> 
+      <ion-segment-button value="toprated-shows" style="color:white">
+      Top Rated Shows
+    </ion-segment-button>
+  </ion-segment>
+</div>
+      </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)"  >
+    <ion-refresher-content style="color:red !important"
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+    <div [ngSwitch]="tv">
+    <div *ngFor = 'let at of ats'>
+     <div *ngIf = 'at.backdrop_path!=null'>
+  <ion-card *ngSwitchCase="'airing-today'" color="darker">
+      <div (click) = "tvDetails(at.id)">
+    <img src="http://image.tmdb.org/t/p/w780{{at.backdrop_path}}"/>
+      
+  <ion-card-content>
+    <ion-card-title>
+        <h1 style="text-align:center; text-decoration:underline">{{at.name}}</h1>
+      </ion-card-title>
+      
+    <p>
+      {{at.overview}}
+    </p>
+  </ion-card-content>
+     </div>
+  </ion-card>
+         </div>
+        </div>
+        <div *ngFor = 'let ps of pss'>
+            <div *ngIf = 'ps.backdrop_path!=null'>
+<ion-card *ngSwitchCase="'popular-shows'" color="darker">
+    <div (click) = "tvDetails(ps.id)">
+     <img src="http://image.tmdb.org/t/p/w500{{ps.backdrop_path}}"/>
+  <ion-card-content>
+    <ion-card-title>
+        <h1 style="text-align:center; text-decoration:underline">{{ps.name}}</h1>
+      </ion-card-title>
+      
+    <p>
+      {{ps.overview}}
+    </p>
+  </ion-card-content>
+    </div>
+  </ion-card>
+        </div>
+        </div>
+        <div *ngFor = 'let tr of trs'>
+            <div *ngIf = 'tr.backdrop_path!=null'>
+<ion-card *ngSwitchCase="'toprated-shows'" color="darker">
+     <div (click) = "tvDetails(tr.id)">
+     <img src="http://image.tmdb.org/t/p/w780{{tr.backdrop_path}}"/>
+  <ion-card-content>
+    <ion-card-title>
+        <h1 style="text-align:center; text-decoration:underline">{{tr.name}}</h1>
+      </ion-card-title>
+      
+    <p>
+      {{tr.overview}}
+    </p>
+  </ion-card-content>
+    </div>
+  </ion-card>
+        </div>
+        </div>
+</div>
+</ion-content>

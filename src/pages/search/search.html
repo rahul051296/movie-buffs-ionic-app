@@ -1,0 +1,27 @@
+
+<ion-header>
+
+  <ion-navbar color="dark">
+    <ion-title><ion-searchbar [(ngModel)]="key" (change)="searchDB($event, key)" placeholder="Search Movies"  ></ion-searchbar></ion-title>
+
+  </ion-navbar>
+   
+</ion-header>
+
+
+<ion-content>
+     <ion-grid>
+  <ion-row >
+   <ion-col width-33 *ngFor="let sc of sch">
+       
+     <ion-card (click) = "movieDetails(sc.id)" color="darker">
+
+      <img style=" width: 100%; height: 150px; object-fit: cover; overflow: hidden;"  src="http://image.tmdb.org/t/p/w185{{sc.poster_path}}" onerror="this.onerror=null;this.src='http://movie-buffs.xyz/images/preview.jpg';"/>
+         <ion-card-header text-wrap style="font-size:1em; text-align:center" >{{sc.title}}</ion-card-header>
+            <ion-card-content style="font-size:.9em; text-align:center; color: #c6c6c6" ><ion-icon name="star" style="color:#FFD700; "></ion-icon> {{sc.vote_average}}/10</ion-card-content>
+        </ion-card>
+      </ion-col> 
+      
+  </ion-row>
+</ion-grid>
+</ion-content>
