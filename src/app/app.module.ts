@@ -1,5 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from "@angular/http";
 import { MyApp } from './app.component';
 import { TvPage } from '../pages/tv/tv';
 import { CelebsPage } from '../pages/celebs/celebs';
@@ -29,6 +31,8 @@ import {SearchCelebPage} from '../pages/search-celeb/search-celeb';
     SearchCelebPage
   ],
   imports: [
+      BrowserModule,
+      HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

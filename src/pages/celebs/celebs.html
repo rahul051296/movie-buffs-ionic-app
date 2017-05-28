@@ -31,7 +31,7 @@
     <ion-col width-33 *ngFor="let pc of pcs">
      <ion-card (click) = "celebDetails(pc.id)" color="darker">
 
-      <img style=" width: 100%; height: 150px; object-fit: cover; overflow: hidden;" src="http://image.tmdb.org/t/p/w342{{pc.profile_path}}"/>
+      <img style=" width: 100%; height: 150px; object-fit: cover; overflow: hidden;" src="http://image.tmdb.org/t/p/w342{{pc.profile_path}}" onerror="this.onerror=null;this.src='http://movie-buffs.xyz/images/preview.jpg';"/>
          <ion-card-header text-wrap style="font-size:.9em; text-align:center;">{{pc.name}}</ion-card-header>
         </ion-card>
       </ion-col>
