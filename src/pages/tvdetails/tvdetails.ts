@@ -17,7 +17,7 @@ export class TvdetailsPage {
     similar:any;
     year: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private moviebuffsService: MBService) {
-      
+
         this.navCtrl = navCtrl;
         this.id = navParams.get('param1');
         this.getTvDetails(this.id);
@@ -25,12 +25,12 @@ export class TvdetailsPage {
         this.getTvGallery(this.id);
         this.getTvSimilar(this.id);
   }
-tvDetails(id){ 
+tvDetails(id){
     var tid = id;
           this.navCtrl.push(TvdetailsPage,{
     param1: tid});
       }
-celebDetails(id){ 
+celebDetails(id){
     var cid = id;
           this.navCtrl.push(CelebdetailsPage,{
     param1: cid});
@@ -40,9 +40,9 @@ getTvDetails(tid){
             this.td = response;
             var year = response.first_air_date;
             var substr=year.substr(0,4);
-            this.year = substr;
+            this.year = '('+substr+')';
     });
-} 
+}
 
 getTvCastDetails(tid){
     this.moviebuffsService.getTvCastDetails(tid).subscribe(response => {
@@ -62,7 +62,7 @@ getTvSimilar(tid){
 }
     doRefresh(refresher) {
     setTimeout(() => {
-        
+
        this.getTvDetails(this.id);
         this.getTvCastDetails(this.id);
         this.getTvGallery(this.id);

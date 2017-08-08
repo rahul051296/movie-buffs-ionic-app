@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color='dark'>
-    <ion-title>{{md?.title}} ({{year}})</ion-title>
+    <ion-title>{{md?.title}} {{year}}</ion-title>
   </ion-navbar>
     <ion-toolbar color="dark">
       <div>
@@ -24,8 +24,8 @@
 </ion-header>
 
 
-<ion-content color="dark">
-    
+<ion-content color="darker">
+
      <ion-refresher (ionRefresh)="doRefresh($event)"  >
     <ion-refresher-content style="color:red !important"
       pullingIcon="arrow-dropdown"
@@ -33,17 +33,17 @@
       refreshingSpinner="crescent">
     </ion-refresher-content>
   </ion-refresher>
-    
+
    <div [ngSwitch]="moviedetails">
   <ion-grid padding style="color:white; text-align:center;" *ngSwitchCase="'details'">
   <ion-row >
     <ion-col width-67>
-    
+
       <img src="http://image.tmdb.org/t/p/w342{{md?.poster_path}}" onerror="this.onerror=null;this.src='http://movie-buffs.xyz/images/preview.jpg';"/>
 
       </ion-col>
-      <ion-col width-33>  
-          <p *ngIf="md?.genres.length!=0"><b>Genre</b><br>{{md?.genres[0].name}}</p>   
+      <ion-col width-33>
+          <p *ngIf="md?.genres.length!=0"><b>Genre</b><br>{{md?.genres[0].name}}</p>
           <p><b>Release Date</b><br>{{md?.release_date}}</p>
           <p><b>Runtime</b><br> {{md?.runtime}} minutes</p>
           <p><b>Status</b><br> {{md?.status}}</p>
@@ -56,7 +56,7 @@
   </ion-row>
       <ion-row>
           <ion-col width-100>
-              <p align=left><b>Synopsis</b></p>   
+              <p align=left><b>Synopsis</b></p>
         <p>{{md?.overview}}</p>
               <p *ngIf="md?.tagline" align=center ><b>Tagline: </b> {{md?.tagline}}</p>
             </ion-col>
@@ -74,20 +74,20 @@
         </ion-card>
       </ion-col>
   </ion-row>
-    </ion-grid> 
+    </ion-grid>
        <ion-grid *ngSwitchCase="'gallery'" color="darker" style="color:white; text-align:center">
         <ion-row  *ngFor="let gl of gallery">
-           
+
             <ion-col >
                 <div>
                 <img src="http://image.tmdb.org/t/p/w500{{gl.file_path}}"/>
                 </div>
-            </ion-col>   
-        </ion-row> 
+            </ion-col>
+        </ion-row>
            <ion-row  >
             <ion-col width-50 *ngFor="let glp of galleryp">
                 <img src="http://image.tmdb.org/t/p/w342{{glp.file_path}}" style="padding:2px;"/>
-            </ion-col>   
+            </ion-col>
         </ion-row>
     </ion-grid>
     <ion-grid *ngSwitchCase="'similar-movie'" color="darker" style="color:white; text-align:center">

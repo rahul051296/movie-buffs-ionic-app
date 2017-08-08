@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Muli');
 page-home {
     background: green;
 }
@@ -7,4 +8,18 @@ page-home {
 }
 .spinner-md-crescent circle {
     stroke: #f4f4f4;
+}
+h6
+{
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-family: 'Muli', sans-serif !important;
+}
+p
+{
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-family: 'Muli', sans-serif !important;
+}
+h1
+{
+  font-family: 'Muli', sans-serif !important;
 }

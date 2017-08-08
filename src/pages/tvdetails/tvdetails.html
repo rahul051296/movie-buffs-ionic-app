@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="dark">
-    <ion-title>{{td?.original_name}} ({{year}})</ion-title>
+    <ion-title>{{td?.original_name}} {{year}}</ion-title>
   </ion-navbar>
      <ion-toolbar color="dark">
       <div>
@@ -36,12 +36,12 @@
   <ion-grid padding style="color:white; text-align:center;" *ngSwitchCase="'details'">
   <ion-row >
     <ion-col width-67>
-    
+
       <img src="http://image.tmdb.org/t/p/w342{{td?.poster_path}}" onerror="this.onerror=null;this.src='http://movie-buffs.xyz/images/preview.jpg';"/>
 
       </ion-col>
       <ion-col width-33>
-        
+
         <p *ngIf="td?.genres.length!=0"><b>Genre</b><br>{{td?.genres[0].name}}</p>
         <p *ngIf="td?.networks.length!=0"><b>Network</b><br> {{td?.networks[0].name}}</p>
           <p><b>Runtime</b><br> {{td?.episode_run_time}} minutes</p>
@@ -53,7 +53,7 @@
       </ion-col>
   </ion-row>
       <ion-row>
-          <ion-col width-100> 
+          <ion-col width-100>
              <p align=left><b>Synopsis</b></p>
         <p>{{td?.overview}}</p>
             </ion-col>
@@ -76,12 +76,12 @@
                 <div>
                 <img src="http://image.tmdb.org/t/p/w500{{gl.file_path}}"/>
                 </div>
-            </ion-col>   
+            </ion-col>
         </ion-row>
         <ion-row  >
             <ion-col width-50 *ngFor="let glp of galleryp">
                 <img src="http://image.tmdb.org/t/p/w342{{glp.file_path}}" style="padding:2px;"/>
-            </ion-col>   
+            </ion-col>
         </ion-row>
     </ion-grid>
     <ion-grid *ngSwitchCase="'similar-tv'"  style="color:white; text-align:center">
@@ -96,5 +96,5 @@
   </ion-row>
     </ion-grid>
     </div>
-    
+
 </ion-content>

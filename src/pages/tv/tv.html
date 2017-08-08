@@ -5,7 +5,7 @@
       <button ion-button icon-only (click)= "search()">
         <ion-icon name="md-search"></ion-icon>
       </button>
-    </ion-buttons> 
+    </ion-buttons>
   </ion-navbar>
     <ion-toolbar color="dark">
       <div>
@@ -15,7 +15,7 @@
     </ion-segment-button>
     <ion-segment-button value="popular-shows" style="color:white">
       Popular Show
-    </ion-segment-button> 
+    </ion-segment-button>
       <ion-segment-button value="toprated-shows" style="color:white">
       Top Rated Shows
     </ion-segment-button>
@@ -38,12 +38,12 @@
   <ion-card *ngSwitchCase="'airing-today'" color="darker">
       <div (click) = "tvDetails(at.id)">
     <img src="http://image.tmdb.org/t/p/w780{{at.backdrop_path}}"/>
-      
+
   <ion-card-content>
     <ion-card-title>
-        <h1 style="text-align:center; text-decoration:underline">{{at.name}}</h1>
+        <h1 style="text-align:center;">{{at.name}}</h1>
       </ion-card-title>
-      
+
     <p>
       {{at.overview}}
     </p>
@@ -59,9 +59,9 @@
      <img src="http://image.tmdb.org/t/p/w500{{ps.backdrop_path}}"/>
   <ion-card-content>
     <ion-card-title>
-        <h1 style="text-align:center; text-decoration:underline">{{ps.name}}</h1>
+        <h1 style="text-align:center;">{{ps.name}}</h1>
       </ion-card-title>
-      
+
     <p>
       {{ps.overview}}
     </p>
@@ -77,9 +77,9 @@
      <img src="http://image.tmdb.org/t/p/w780{{tr.backdrop_path}}"/>
   <ion-card-content>
     <ion-card-title>
-        <h1 style="text-align:center; text-decoration:underline">{{tr.name}}</h1>
+        <h1 style="text-align:center;">{{tr.name}}</h1>
       </ion-card-title>
-      
+
     <p>
       {{tr.overview}}
     </p>

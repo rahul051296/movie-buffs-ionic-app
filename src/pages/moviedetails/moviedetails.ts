@@ -32,7 +32,7 @@ movieDetails(id){
           this.navCtrl.push(MoviedetailsPage,{
     param1: mid});
       }
-celebDetails(id){ 
+celebDetails(id){
     var cid = id;
           this.navCtrl.push(CelebdetailsPage,{
     param1: cid});
@@ -42,9 +42,9 @@ celebDetails(id){
             this.md = response;
             var year = response.release_date;
             var substr=year.substr(0,4);
-            this.year = substr;
+            this.year = '('+substr+')';
     });
-} 
+}
 getMovieCastDetails(mid){
     this.moviebuffsService.getMovieCastDetails(mid).subscribe(response => {
         this.cast = response.cast;
@@ -59,7 +59,7 @@ getMovieGallery(mid){
 }
 getMovieSimilar(mid){
     this.moviebuffsService.getMovieSimilar(mid).subscribe(response => {
-         
+
         this.similar = response.results;
     });
 }
@@ -71,7 +71,7 @@ movDetails(id){
 }
    doRefresh(refresher) {
     setTimeout(() => {
-        
+
         this.getMovieDetails(this.id);
         this.getMovieCastDetails(this.id);
         this.getMovieGallery(this.id);
