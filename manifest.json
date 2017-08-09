@@ -1,6 +1,6 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "Movie Buffs",
+  "short_name": "Movie Buffs",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
